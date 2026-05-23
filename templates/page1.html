@@ -17,50 +17,17 @@
         <h1 style = "text-align: center;">School Assistant</h1>
     </header>
 
-    <div class="week">
-        <div class="day">
-            <div class="daytitle">Monday</div>
-            <div class="period">Period 1 : Mathz</div>
-            <div class="period">Period 2 : Free</div>
-            <div class="period">Period 3 : Free</div>
-            <div class="period">Period 4 : English</div>
-            <textarea class="notes" placeholder="Enter notes for Monday"></textarea>
-        </div>
+    <h1>Insert Data into Database</h1>
 
-        <div class="day">
-            <div class="daytitle">Tuesday</div>
-            <div class="period">Period 1 : CT</div>
-            <div class="period">Period 2 : Free</div>
-            <div class="period">Period 3 : Free</div>
-            <div class="period">Period 4 : English</div>
-        </div>
+    <form method="POST">
 
-        <div class="day">
-            <div class="daytitle">Wednesday</div>
-            <div class="period">Period 1 : SE</div>
-            <div class="period">Period 2 : CT</div>
-            <div class="period">Period 3 : Free</div>
-            <div class="period">Period 4 : English</div>
-        </div>
+        <label for="data">Enter Data:</label>
 
-        <div class="day">
-            <div class="daytitle">Thursday</div>
-            <div class="period">Period 1 : Maths</div>
-            <div class="period">Period 2 : Free</div>
-            <div class="period">Period 3 : SE</div>
-            <div class="period">Period 4 : English</div>
-        </div>
+        <input type="text" name="data" required>
 
-        <div class="day">
-            <div class="daytitle">Friday</div>
-            <div class="period">Period 1 : Maths</div>
-            <div class="period">Period 2 : Free</div>
-            <div class="period">Period 3 : CT</div>
-            <div class="period">Period 4 : English</div>
-        </div>
-    </div>
+        <button type="submit">Submit</button>
 
-    <button id="save-notes-btn" style="position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); z-index: 1000;"> Save Notes <button></button>
+    </form>
 </body>
 
 </html>

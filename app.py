@@ -1,4 +1,5 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
+import sqlite3
 
 app = Flask(__name__)
 
@@ -8,9 +9,27 @@ def home():
 
     return render_template('index.html')
 
-@app.route('/page1')
+def insert_data(data):
+
+    with sqlite3.connect("myDB.db") as conn:
+
+        cursor = conn.cursor()
+
+        cursor.execute(f"INSERT INTO myTable (myFirstCol) VALUES ('{data}')")
+
+        conn.commit()
+
+    print("You are in insert_data - > ", data)
+
+@app.route('/page1', methods=['GET', 'POST'])
 
 def page1():
+
+    data = request.form.get('data')
+
+    print("The data is", data)
+
+    insert_data(data)  # Insert the data into the database
 
     return render_template('page1.html')
 
