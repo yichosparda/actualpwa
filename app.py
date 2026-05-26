@@ -10,26 +10,25 @@ def home():
     return render_template('index.html')
 
 def insert_data(data):
+    if data is None:
+        return
 
     with sqlite3.connect("myDB.db") as conn:
-
         cursor = conn.cursor()
-
-        cursor.execute(f"INSERT INTO myTable (myFirstCol) VALUES ('{data}')")
-
+        # Use parameterized query to avoid SQL injection and handle values safely
+        cursor.execute("INSERT INTO accounts (email) VALUES (?)", (data,))
         conn.commit()
 
-    print("You are in insert_data - > ", data)
+    # print("You are in insert_data ->", data)
 
 @app.route('/page1', methods=['GET', 'POST'])
-
 def page1():
-
-    data = request.form.get('data')
-
-    print("The data is", data)
-
-    insert_data(data)  # Insert the data into the database
+    # Only insert when the form is submitted via POST and a value is provided
+    if request.method == 'POST':
+        data = request.form.get('data')
+        # print("The data is", data)
+        if data:
+            insert_data(data)  # Insert the data into the database
 
     return render_template('page1.html')
 
