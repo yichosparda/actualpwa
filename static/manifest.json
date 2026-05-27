@@ -16,25 +16,73 @@
         "src": "/static/bakery.png",
         "sizes": "410x609",
         "type": "image/png",
-        "purpose":"any"
+        "purpose": "any"
       },
       {
         "src": "/static/cover.png",
         "sizes": "1200x630",
         "type": "image/png",
-        "purpose":"any"
+        "purpose": "any"
       },
       {
         "src": "/static/profile.png",
         "sizes": "512x512",
         "type": "image/png",
-        "purpose":"any"
+        "purpose": "any"
       },
       {
         "src": "/static/logo.png",
         "sizes": "512x512",
         "type": "image/png",
-        "purpose":"any"
+        "purpose": "any"
+      },
+      {
+        "src": "/static/items/chocolate_cake/1.png",
+        "sizes": "1080x1080",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "/static/items/chocolate_cake/2.png",
+        "sizes": "992x514",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "/static/items/chocolate_cake/3.png",
+        "sizes": "500x500",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "/static/items/chocolate_cake/logo.png",
+        "sizes": "1200x1200",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "/static/items/vanilla_cake/1.png",
+        "sizes": "1280x1388",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "/static/items/vanilla_cake/2.png",
+        "sizes": "850x850",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "/static/items/vanilla_cake/3.png",
+        "sizes": "500x500",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "/static/items/vanilla_cake/logo.png",
+        "sizes": "500x500",
+        "type": "image/png",
+        "purpose": "any"
       }
     ]
   }

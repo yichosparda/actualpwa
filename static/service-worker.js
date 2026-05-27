@@ -13,6 +13,14 @@ const urlsToCache = [
   "/static/cover.png",
   "/static/profile.png",
   "/static/logo.png",
+  "/static/items/chocolate_cake/logo.png",
+  "/static/items/chocolate_cake/1.png",
+  "/static/items/chocolate_cake/2.png",
+  "/static/items/chocolate_cake/3.png",
+  "/static/items/vanilla_cake/logo.png",
+  "/static/items/vanilla_cake/1.png",
+  "/static/items/vanilla_cake/2.png",
+  "/static/items/vanilla_cake/3.png",
 ];
 // Note that this is coded to minimise caching. This decreases performance but makes debugging easier
 self.addEventListener("install", event => {
