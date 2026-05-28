@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='swiper-bundle.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
 
@@ -17,6 +22,7 @@
         .catch(err => console.error('Service Worker Registration Failed:', err));
     }
     </script>
+</head>
 
 <body>
     <header>
@@ -61,8 +67,58 @@
         </div>
         <div class="carousel">
             image carousel or smth bro...
+            <div class="card_container swiper">
+                <div class="slider-wrapper">
+                <div class="card-list swiper-wrapper">
+
+                    <div class="card-item swiper-slide">
+                    <img src="images/img-1.jpg" alt="User Image" class="user-image" />
+                    <h2 class="user-name">James Wilson</h2>
+                    <p class="user-profession">Software Developer</p>
+                    <button class="message-button">Message</button>
+                    </div>
+
+                    <div class="card-item swiper-slide">
+                    <img src="images/img-2.jpg" alt="User Image" class="user-image" />
+                    <h2 class="user-name">Michael Brown</h2>
+                    <p class="user-profession">Graphic Designer</p>
+                    <button class="message-button">Message</button>
+                    </div>
+
+                    <div class="card-item swiper-slide">
+                    <img src="images/img-3.jpg" alt="User Image" class="user-image" />
+                    <h2 class="user-name">Sophia Garcia</h2>
+                    <p class="user-profession">Online Teacher</p>
+                    <button class="message-button">Message</button>
+                    </div>
+
+                    <div class="card-item swiper-slide">
+                    <img src="images/img-4.jpg" alt="User Image" class="user-image" />
+                    <h2 class="user-name">Emily Johnson</h2>
+                    <p class="user-profession">Content Writer</p>
+                    <button class="message-button">Message</button>
+                    </div>
+
+                    <div class="card-item swiper-slide">
+                    <img src="images/img-5.jpg" alt="User Image" class="user-image" />
+                    <h2 class="user-name">Daniel Martinez</h2>
+                    <p class="user-profession">Photographer</p>
+                    <button class="message-button">Message</button>
+                    </div>
+
+                </div>
+
+                <div class="swiper-pagination"></div>
+
+                <div class="swiper-slide-button swiper-button-prev"></div>
+                <div class="swiper-slide-button swiper-button-next"></div>
+                </div>
+            </div>
         </div>
     </div>
+
+    <script src="{{ url_for('static', filename='swiper-bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='carousel.js') }}"></script>
 
 </body>
 </html>
