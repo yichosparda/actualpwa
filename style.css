@@ -58,7 +58,7 @@
 }
 
 .slider-wrapper .swiper-pagination-bullet{
-    background: #5372F0;
+    background: #53f053;
     height: 13px;
     width: 13px;
     opacity: 0.5;
@@ -69,13 +69,13 @@
 }
 
 .slider-wrapper .swiper-slide-button{
-    color: #5372F0;
+    color: #53f08d;
     margin-top: -50px;
     transition: 0.2s ease;
 }
 
 .slider-wrapper .swiper-slide-button:hover{
-    color: #4658ff;
+    color: #46ff68;
 }
 
 @media (max-width: 768px) {

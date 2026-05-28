@@ -59,53 +59,50 @@
     <div class = "page">
         <div class = "pagetop">
             <div class = "textcontainer">
-                <h3>WELCOME TO BAKERY NAME</h3>
+                <h2>WELCOME TO BAKERY NAME</h2>
                 <p style = "width: 60%;"">dsaf dsa dfs sakfhksdaljf sdajsdf dsk fdsakfdjkasdf </p>
                 <a class="buttonlink">contact us</a>
             </div>
             <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" width="40%" style = "margin-left: auto;">
         </div>
+
         <div class="carousel">
             image carousel or smth bro...
-            <div class="card_container swiper">
+            <div class="swiper">
                 <div class="slider-wrapper">
-                <div class="card-list swiper-wrapper">
+                    <div class="card-list swiper-wrapper">
 
-                    <div class="card-item swiper-slide">
-                    <img src="images/img-1.jpg" alt="User Image" class="user-image" />
-                    <h2 class="user-name">James Wilson</h2>
-                    <p class="user-profession">Software Developer</p>
-                    <button class="message-button">Message</button>
+                        <div class="card-item swiper-slide">
+                            <img src="{{ url_for('static', filename='items/vanilla_cake/logo.png') }}" alt="User Image" class="user-image" />
+                            <h3 style="margin-bottom: 3%;">vanilla cake</h3>
+                            <a class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
+                        </div>
+
+                        <div class="card-item swiper-slide">
+                            <img src="{{ url_for('static', filename='items/ice_cream_cake/logo.png') }}" alt="User Image" class="user-image" />
+                            <h3 style="margin-bottom: 3%;">ice cream cake</h3>
+                            <a class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
+                        </div>
+
+                        <div class="card-item swiper-slide">
+                            <img src="{{ url_for('static', filename='items/eggtart/logo.png') }}" alt="User Image" class="user-image" />
+                            <h3 style="margin-bottom: 3%;">eggtart</h3>
+                            <a class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
+                        </div>
+
+                        <div class="card-item swiper-slide">
+                            <img src="{{ url_for('static', filename='items/macaron/logo.png') }}" alt="User Image" class="user-image" />
+                            <h3 style="margin-bottom: 3%;">macarons</h3>
+                            <a class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
+                        </div>
+
+                        <div class="card-item swiper-slide">
+                            <img src="{{ url_for('static', filename='items/banana_bread/logo.png') }}" alt="User Image" class="user-image" />
+                            <h3 style="margin-bottom: 3%;">banana bread</h3>
+                            <a class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
+                        </div>
+
                     </div>
-
-                    <div class="card-item swiper-slide">
-                    <img src="images/img-2.jpg" alt="User Image" class="user-image" />
-                    <h2 class="user-name">Michael Brown</h2>
-                    <p class="user-profession">Graphic Designer</p>
-                    <button class="message-button">Message</button>
-                    </div>
-
-                    <div class="card-item swiper-slide">
-                    <img src="images/img-3.jpg" alt="User Image" class="user-image" />
-                    <h2 class="user-name">Sophia Garcia</h2>
-                    <p class="user-profession">Online Teacher</p>
-                    <button class="message-button">Message</button>
-                    </div>
-
-                    <div class="card-item swiper-slide">
-                    <img src="images/img-4.jpg" alt="User Image" class="user-image" />
-                    <h2 class="user-name">Emily Johnson</h2>
-                    <p class="user-profession">Content Writer</p>
-                    <button class="message-button">Message</button>
-                    </div>
-
-                    <div class="card-item swiper-slide">
-                    <img src="images/img-5.jpg" alt="User Image" class="user-image" />
-                    <h2 class="user-name">Daniel Martinez</h2>
-                    <p class="user-profession">Photographer</p>
-                    <button class="message-button">Message</button>
-                    </div>
-
                 </div>
 
                 <div class="swiper-pagination"></div>
