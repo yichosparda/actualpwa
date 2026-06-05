@@ -4,10 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-    />
     <link rel="stylesheet" href="{{ url_for('static', filename='swiper-bundle.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
@@ -37,7 +33,7 @@
 
     <div class = "subheader">
         <div class = "buttoncontainer">
-            <a href="/" class="buttonlink">HOME</a>
+            <a class="buttonlink">HOME</a>
             <a href="/menu" class="buttonlink">MENU</a>
             <a href="/custom" class="buttonlink">CUSTOM</a>
         </div>
@@ -61,13 +57,13 @@
             <div class = "textcontainer">
                 <h2>WELCOME TO BAKERY NAME</h2>
                 <p style = "width: 60%;"">dsaf dsa dfs sakfhksdaljf sdajsdf dsk fdsakfdjkasdf </p>
-                <a class="buttonlink">contact us</a>
+                <a class="buttonlink" style="width:40%;">contact us</a>
             </div>
             <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" width="40%" style = "margin-left: auto;">
         </div>
 
         <div class="carousel">
-            image carousel or smth bro...
+            <h3 style="margin:2%; padding-top:2%">best sellers</h3>
             <div class="swiper">
                 <div class="slider-wrapper">
                     <div class="card-list swiper-wrapper">
@@ -104,18 +100,16 @@
 
                     </div>
                 </div>
-
                 <div class="swiper-pagination"></div>
 
                 <div class="swiper-slide-button swiper-button-prev"></div>
                 <div class="swiper-slide-button swiper-button-next"></div>
-                </div>
             </div>
+            <a href="menu" style="display: flex; justify-content: flex-end; padding-bottom:2%;margin-right: 2%;">view all</a>
         </div>
-    </div>
 
     <script src="{{ url_for('static', filename='swiper-bundle.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='carousel.js') }}"></script>
+    <script src="{{ url_for('static', filename='carousel-home.js') }}"></script>
 
 </body>
 </html>
