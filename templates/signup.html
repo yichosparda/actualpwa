@@ -23,7 +23,7 @@
     <header>
         <img src="{{ url_for('static', filename='bakery.png') }}" alt=""width="50px"">
         <h1 style = "text-align: left; margin-left: 1%;">NAME OF BAKERY</h1>
-        <a href="signup" style="margin-left: auto;">
+        <a style="margin-left: auto;">
             <img src="{{ url_for('static', filename='profile.png') }}" alt=""width="50px">
         </a>
     </header>
@@ -34,7 +34,7 @@
         <div class = "buttoncontainer">
             <a class="buttonlink" href="/">HOME</a>
             <a class="buttonlink" href="menu" >MENU</a>
-            <a class="buttonlink" >CUSTOM</a>
+            <a class="buttonlink" href="custom" >CUSTOM</a>
         </div>
         <div class = "linkcontainer">
             <a href="page1">CAKES</a>
@@ -47,13 +47,30 @@
 
     <div style = "border-bottom: 2px solid #84592B; margin-left : 2%; margin-right: 2%;"></div>
 
-    <div class ="textcontainer" style="display:flex">
-        <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" width="40%" style = "margin-right: auto;">
-        <div>
-            <h3>request</h3>
-        </div>
+    <img src="{{ url_for('static', filename='cover.png') }}" alt="" width="100%" style = "margin-top: 1%;">
+
+    <div class="container">
+        <h3>SIGNUP</h3>
+        <form method="POST" class="acc_container">
+            <label>Email:</label>
+            <input name="email" type="email" placeholder="Enter your email" required>
+
+            <br>
+
+            <label for="username">Username:</label>
+            <input name="username" placeholder="Enter your username" required>
+
+            <br>
+
+            <label>Password:</label>
+            <input name="password" type="password" placeholder="Enter password" required>
+
+            <br>
+
+            <button type="submit" class="buttonlink">SIGNUP</button>
+        </form>
+        <a href="login">already have an account? login</a>
     </div>
-    
 
 </body>
 </html>
