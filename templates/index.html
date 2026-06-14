@@ -24,8 +24,8 @@
     <header>
         <img src="{{ url_for('static', filename='bakery.png') }}" alt=""width="50px"">
         <h1 style = "text-align: left; margin-left: 1%;">NAME OF BAKERY</h1>
-        <a href="signup" style="margin-left: auto;">
-            <img src="{{ url_for('static', filename='profile.png') }}" alt=""width="50px">
+        <a href="cart" style="margin-left: auto;">
+            <img src="{{ url_for('static', filename='icons/cart.png') }}" alt=""width="50px">
         </a>
     </header>
 
@@ -107,9 +107,12 @@
             </div>
             <a href="menu" style="display: flex; justify-content: flex-end; padding-bottom:2%;margin-right: 2%;">view all</a>
         </div>
+    </div>
 
+    <footer>
+        <h1>contact us</h1>
+    </footer>
     <script src="{{ url_for('static', filename='swiper-bundle.min.js') }}"></script>
     <script src="{{ url_for('static', filename='carousel-home.js') }}"></script>
-
 </body>
 </html>

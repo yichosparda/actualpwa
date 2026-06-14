@@ -17,37 +17,37 @@
         .catch(err => console.error('Service Worker Registration Failed:', err));
     }
     </script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 
+<body class="no-scroll">
+    <div style="background-color: #F4E0BE; padding-bottom: 0.5%;">
+        <header>
+            <img src="{{ url_for('static', filename='bakery.png') }}" alt=""width="50px"">
+            <h1 style = "text-align: left; margin-left: 1%;">NAME OF BAKERY</h1>
+            <a href="signup" style="margin-left: auto;">
+                <img src="{{ url_for('static', filename='icons/cart.png') }}" alt=""width="50px">
+            </a>
+        </header>
 
-<body>
-    <header>
-        <img src="{{ url_for('static', filename='bakery.png') }}" alt=""width="50px"">
-        <h1 style = "text-align: left; margin-left: 1%;">NAME OF BAKERY</h1>
-        <a href="signup" style="margin-left: auto;">
-            <img src="{{ url_for('static', filename='profile.png') }}" alt=""width="50px">
-        </a>
-    </header>
+        <div style = "border-bottom: 2px solid #84592B; margin-left : 2%; margin-right: 2%;"></div>
 
+        <div class = "subheader">
+            <div class = "buttoncontainer">
+                <a class="buttonlink" href="/">HOME</a>
+                <a class="buttonlink" href="menu" >MENU</a>
+                <a class="buttonlink" href="custom" >CUSTOM</a>
+            </div>
+            <div class = "linkcontainer">
+                <a href="page1">CAKES</a>
+                <a href="page1">PIES</a>
+                <a href="page1">BREADS</a>
+                <a href="page1">COOKIES</a>
+                <a href="page1">OTHERS</a>
+            </div>
+        </div>
     <div style = "border-bottom: 2px solid #84592B; margin-left : 2%; margin-right: 2%;"></div>
 
-    <div class = "subheader">
-        <div class = "buttoncontainer">
-            <a class="buttonlink" href="/">HOME</a>
-            <a class="buttonlink" href="menu" >MENU</a>
-            <a class="buttonlink" href="custom" >CUSTOM</a>
-        </div>
-        <div class = "linkcontainer">
-            <a href="page1">CAKES</a>
-            <a href="page1">PIES</a>
-            <a href="page1">BREADS</a>
-            <a href="page1">COOKIES</a>
-            <a href="page1">OTHERS</a>
-        </div>
     </div>
-
-    <div style = "border-bottom: 2px solid #84592B; margin-left : 2%; margin-right: 2%;"></div>
-
-    <img src="{{ url_for('static', filename='cover.png') }}" alt="" width="100%" style = "margin-top: 1%;">
 
     <div class="container">
         <h3>LOGIN</h3>
@@ -56,9 +56,17 @@
             <input name="email" type="email" placeholder="Enter your email" required>
 
             <br>
-
+            
             <label>Password:</label>
-            <input name="password" type="password" placeholder="Enter password" required>
+            <input id="myInput" name="password" type="password" placeholder="Enter password" 
+            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" 
+            required title="Must contain at least one uppercase letter, one lowercase letter, one number, and one special character (@$!%*?&). Minimum 8 characters.">
+            <div class="show-password">
+                <label>
+                    <input type="checkbox" onclick="myFunction()">
+                    Show Password
+                </label>
+            </div>
 
             <br>
 
@@ -67,5 +75,7 @@
         <a href="signup">don't have an account? signup</a>
     </div>
 
+    <img src="{{ url_for('static', filename='cover.png') }}" alt="" class="coverbg">
+    
 </body>
 </html>

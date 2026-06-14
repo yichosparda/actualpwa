@@ -14,10 +14,10 @@
 
 
 -- 3. CREATE THE CHILD TABLE WITH FOREIGN KEY REFERENCE
-CREATE TABLE employees (
-    emp_id INTEGER PRIMARY KEY,
-    emp_name TEXT NOT NULL,
-    department_id INTEGER,
-    -- Establishes the relationship line
-    FOREIGN KEY (department_id) REFERENCES (dept_id)
-);
+-- CREATE TABLE employees (
+--     emp_id INTEGER PRIMARY KEY,
+--     emp_name TEXT NOT NULL,
+--     department_id INTEGER,
+--     -- Establishes the relationship line
+--     FOREIGN KEY (department_id) REFERENCES (dept_id)
+-- );

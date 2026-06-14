@@ -1,16 +1,11 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, session, request, redirect, url_for
 import sqlite3
 import bcrypt
 s = bcrypt.gensalt()
 
 app = Flask(__name__)
 
-@app.route('/')
-
-def home():
-
-    return render_template('index.html')
-
+app.secret_key = 'your_secret_key'
 def insert_acc(email, username, password):
     if email is None or username is None or password is None:
         return
@@ -20,12 +15,17 @@ def insert_acc(email, username, password):
         # Use parameterized query to avoid SQL injection and handle values safely
         cursor.execute("INSERT INTO customers(email, username, password) VALUES (?,?,?)", (email,username,password))
         conn.commit()
+        session['logged_in'] = True
+        cursor.execute("SELECT cust_ID FROM customers WHERE email = ?", (email,))
+        row = cursor.fetchone()
+        session['ID'] = row[0]
+        print(session['ID'])
         # cursor.execute("CREATE TABLE employees")
     # print("You are in insert_data ->", data)
 
 def check_acc(email, password):
     if email is None or password is None:
-        return
+        return False
 
     with sqlite3.connect("myDB.db") as conn:
         cursor = conn.cursor()
@@ -38,10 +38,16 @@ def check_acc(email, password):
                 return False
             
             stored_password = row[0]
+            if isinstance(stored_password, str):
+                stored_password = stored_password.encode('utf-8')
             
             # 4. Check if the provided password matches the stored hash
-            # bcrypt handles the salt automatically during comparison
-            if password == stored_password:
+            if bcrypt.checkpw(password.encode(), stored_password):
+                session['logged_in'] = True
+                cursor.execute("SELECT cust_ID FROM customers WHERE email = ?", (email,))
+                row = cursor.fetchone()
+                session['ID'] = row[0]
+                print(session['ID'])
                 return True
             else:
                 return False
@@ -50,16 +56,34 @@ def check_acc(email, password):
             print(f"Database error: {e}")
             return False
 
+def insert_request(submission):
+    with sqlite3.connect("myDB.db") as conn:
+        cursor = conn.cursor()
+        # Use parameterized query to avoid SQL injection and handle values safely
+        cursor.execute("INSERT INTO requests(cust_ID, request) VALUES (?,?)", (session['ID'], submission))
+        conn.commit()
+
+@app.route('/')
+
+def home():
+
+    return render_template('index.html')
+
 @app.route('/menu')
 
 def menu():
 
     return render_template('menu.html')
 
-@app.route('/custom')
+@app.route('/custom', methods=['GET','POST'])
 
 def custom():
-
+    if request.method == 'POST':
+        if 'logged_in' in session:
+            submission=request.form.get('request')
+            insert_request(submission)
+        else:
+            return redirect(url_for('signup'))
     return render_template('custom.html')
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -68,12 +92,9 @@ def signup():
     if request.method == 'POST':
         email = request.form.get('email')
         username = request.form.get('username')
-        password = bcrypt.hashpw((request.form.get('password').encode()),s)
-        # print("The data is", data)
-        # print(email)
-        # print(username)
-        # print(password)
+        password = bcrypt.hashpw(request.form.get('password').encode(), bcrypt.gensalt())
         insert_acc(email, username, password)
+        return redirect(url_for('home'))
 
     return render_template('signup.html')
 
@@ -82,14 +103,28 @@ def signup():
 def login():
     if request.method == 'POST':
         email = request.form.get('email')
-        password = bcrypt.hashpw((request.form.get('password').encode()),s)
-        # print("The data is", data)
-            # insert_data(data)
-        if check_acc(email,password):
+        password = request.form.get('password')
+        if check_acc(email, password):
             print("logged in!")
-        else: print("email or password is wrong")
+            return redirect(url_for('home'))
+        else:
+            print("email or password is wrong")
 
     return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    # Remove all keys from the session dictionary
+    session.clear()
+    return redirect(url_for('login'))
+
+@app.route('/cart')
+
+def cart():
+    if 'logged_in' in session:
+        return render_template('cart.html')
+    else: 
+        return render_template('signup.html')
 
 @app.route('/manifest.json')
 

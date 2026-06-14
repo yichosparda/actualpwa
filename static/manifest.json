@@ -25,7 +25,7 @@
         "purpose": "any"
       },
       {
-        "src": "/static/profile.png",
+        "src": "/static/icons/cart.png",
         "sizes": "512x512",
         "type": "image/png",
         "purpose": "any"
