@@ -16,9 +16,11 @@ def insert_acc(email, username, password):
         cursor.execute("INSERT INTO customers(email, username, password) VALUES (?,?,?)", (email,username,password))
         conn.commit()
         session['logged_in'] = True
-        cursor.execute("SELECT cust_ID FROM customers WHERE email = ?", (email,))
+        cursor.execute("SELECT cust_ID, username FROM customers WHERE email = ?", (email,))
         row = cursor.fetchone()
         session['ID'] = row[0]
+        session['name'] = row[1]
+        return render_template('cart.html', name = session['name'])
         print(session['ID'])
         # cursor.execute("CREATE TABLE employees")
     # print("You are in insert_data ->", data)
@@ -44,9 +46,11 @@ def check_acc(email, password):
             # 4. Check if the provided password matches the stored hash
             if bcrypt.checkpw(password.encode(), stored_password):
                 session['logged_in'] = True
-                cursor.execute("SELECT cust_ID FROM customers WHERE email = ?", (email,))
+                cursor.execute("SELECT cust_ID, username FROM customers WHERE email = ?", (email,))
                 row = cursor.fetchone()
                 session['ID'] = row[0]
+                session['name'] = row[1]
+                return render_template('cart.html', name = session['name'])
                 print(session['ID'])
                 return True
             else:
@@ -107,6 +111,7 @@ def login():
         if check_acc(email, password):
             print("logged in!")
             return redirect(url_for('home'))
+        
         else:
             print("email or password is wrong")
 
@@ -122,7 +127,7 @@ def logout():
 
 def cart():
     if 'logged_in' in session:
-        return render_template('cart.html')
+        return render_template('cart.html', name=session['name'])
     else: 
         return render_template('signup.html')
 
