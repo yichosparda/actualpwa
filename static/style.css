@@ -254,6 +254,27 @@ input {
   /* margin-left:auto; */
 }
 
+.menucontainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px; 
+  justify-content: space-evenly;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.menuitem {
+  /* flex: 1 1 250px; */
+  text-align: center;
+  align-items: center; 
+  background: #F4E7CE;
+  flex: 1 1 250px;
+  border-radius: 10px;
+  border-color: white;
+  border-style: solid;
+  border-width: 1px;
+}
+
 @media screen and (max-width: 700px) {
   .requestcontainer {
     display: block;
@@ -316,7 +337,6 @@ input {
 }
 
 .card-item{
-    color: #fff;
     user-select: none;
     padding: 35px;
     display: flex;
@@ -324,9 +344,11 @@ input {
     align-items: center;
     justify-content: center;
     border-radius: 8px;
-    backdrop-filter: blur(30px);
-    background: rgba(255,255,255,0.2);
-    border: 1px solid rgba(255,255,255,0.5);
+    background: #F4E7CE;
+    border-radius: 10px;
+    border-color: white;
+    border-style: solid;
+    border-width: 1px;
 }
 
 .user-image{

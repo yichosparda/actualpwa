@@ -6,6 +6,14 @@ s = bcrypt.gensalt()
 app = Flask(__name__)
 
 app.secret_key = 'your_secret_key'
+
+def get_db_connection():
+    # Connects to your SQL database file
+    conn = sqlite3.connect('myDB.db')
+    # Configures the connection to return rows that act like dictionaries
+    conn.row_factory = sqlite3.Row
+    return conn
+
 def insert_acc(email, username, password):
     if email is None or username is None or password is None:
         return
@@ -75,9 +83,25 @@ def home():
 
 @app.route('/menu')
 
-def menu():
+def show_items():
+    conn = get_db_connection()
+    # Execute the SQL query to get all items
+    cakes = conn.execute('SELECT product_name, price FROM products WHERE type="cake"').fetchall()
+    pies = conn.execute('SELECT product_name, price FROM products WHERE type="pie"').fetchall()
+    breads = conn.execute('SELECT product_name, price FROM products WHERE type="bread"').fetchall()
+    cookies = conn.execute('SELECT product_name, price FROM products WHERE type="cookie"').fetchall()
+    others = conn.execute('SELECT product_name, price FROM products WHERE type="other"').fetchall()
+    conn.close()
+    
+    # Pass the database results to the HTML template as the variable "items"
+    return render_template('menu.html', cakes=cakes, pies=pies, breads=breads, cookies=cookies, others=others)
 
-    return render_template('menu.html')
+@app.route('/product')
+def product():
+    name = request.args.get('name')
+    print(name)
+    return render_template('product.html', product=name)
+
 
 @app.route('/custom', methods=['GET','POST'])
 

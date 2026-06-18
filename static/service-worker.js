@@ -8,6 +8,7 @@ const urlsToCache = [
   "/custom.html",
   "/menu.html",
   "/cart.html",
+  "/product.html",
   "/static/style.css",
   "/static/swiper-bundle.min.css",
   "/static/script.js",
