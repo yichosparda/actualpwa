@@ -23,6 +23,7 @@ def insert_acc(email, username, password):
         # Use parameterized query to avoid SQL injection and handle values safely
         cursor.execute("INSERT INTO customers(email, username, password) VALUES (?,?,?)", (email,username,password))
         conn.commit()
+        # cursor.execute("CREATE TABLE IF NOT EXISTS")
         session['logged_in'] = True
         cursor.execute("SELECT cust_ID, username FROM customers WHERE email = ?", (email,))
         row = cursor.fetchone()
