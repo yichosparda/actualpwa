@@ -86,11 +86,11 @@ def home():
 def show_items():
     conn = get_db_connection()
     # Execute the SQL query to get all items
-    cakes = conn.execute('SELECT product_name, price FROM products WHERE type="cake"').fetchall()
-    pies = conn.execute('SELECT product_name, price FROM products WHERE type="pie"').fetchall()
-    breads = conn.execute('SELECT product_name, price FROM products WHERE type="bread"').fetchall()
-    cookies = conn.execute('SELECT product_name, price FROM products WHERE type="cookie"').fetchall()
-    others = conn.execute('SELECT product_name, price FROM products WHERE type="other"').fetchall()
+    cakes = conn.execute('SELECT product_name, price, stock FROM products WHERE type="cake"').fetchall()
+    pies = conn.execute('SELECT product_name, price, stock FROM products WHERE type="pie"').fetchall()
+    breads = conn.execute('SELECT product_name, price, stock FROM products WHERE type="bread"').fetchall()
+    cookies = conn.execute('SELECT product_name, price, stock FROM products WHERE type="cookie"').fetchall()
+    others = conn.execute('SELECT product_name, price, stock FROM products WHERE type="other"').fetchall()
     conn.close()
     
     # Pass the database results to the HTML template as the variable "items"
@@ -99,8 +99,10 @@ def show_items():
 @app.route('/product')
 def product():
     name = request.args.get('name')
-    print(name)
-    return render_template('product.html', product=name)
+    price = request.args.get('price')
+    stock = request.args.get('stock')
+    # print (stock)
+    return render_template('product.html', name=name, price=price, stock=stock)
 
 
 @app.route('/custom', methods=['GET','POST'])
