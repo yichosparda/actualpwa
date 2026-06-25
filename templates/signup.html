@@ -18,7 +18,7 @@
     }
     </script>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
-
+</head>
 <body class="no-scroll">
     <div style="background-color: #F4E0BE; padding-bottom: 0.5%;">
         <header>
@@ -51,6 +51,15 @@
 
     <div class="container">
         <h3>SIGNUP</h3>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="flashes">
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
         <form method="POST" class="acc_container">
             <label>Email:</label>
             <input name="email" type="email" placeholder="Enter your email" required>

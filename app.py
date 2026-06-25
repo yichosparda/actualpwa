@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, request, redirect, url_for
+from flask import Flask, render_template, session, request, redirect, url_for, flash
 import sqlite3
 import bcrypt
 s = bcrypt.gensalt()
@@ -21,15 +21,21 @@ def insert_acc(email, username, password):
     with sqlite3.connect("myDB.db") as conn:
         cursor = conn.cursor()
         # Use parameterized query to avoid SQL injection and handle values safely
-        cursor.execute("INSERT INTO customers(email, username, password) VALUES (?,?,?)", (email,username,password))
-        conn.commit()
-        # cursor.execute("CREATE TABLE IF NOT EXISTS")
-        session['logged_in'] = True
-        cursor.execute("SELECT cust_ID, username FROM customers WHERE email = ?", (email,))
-        row = cursor.fetchone()
-        session['ID'] = row[0]
-        session['name'] = row[1]
-        return render_template('cart.html', name = session['name'])
+        cursor.execute("SELECT EXISTS(SELECT 1 FROM customers WHERE email = ?)", (email,))
+        email_exists=cursor.fetchone()[0]
+        if email_exists:
+            return None
+        
+        else:
+            cursor.execute("INSERT INTO customers(email, username, password) VALUES (?,?,?)", (email,username,password))
+            conn.commit()
+            # cursor.execute("CREATE TABLE IF NOT EXISTS")
+            session['logged_in'] = True
+            cursor.execute("SELECT cust_ID, username FROM customers WHERE email = ?", (email,))
+            row = cursor.fetchone()
+            session['ID'] = row[0]
+            session['name'] = row[1]
+            return render_template('cart.html', name = session['name'])
         print(session['ID'])
         # cursor.execute("CREATE TABLE employees")
     # print("You are in insert_data ->", data)
@@ -59,8 +65,6 @@ def check_acc(email, password):
                 row = cursor.fetchone()
                 session['ID'] = row[0]
                 session['name'] = row[1]
-                return render_template('cart.html', name = session['name'])
-                print(session['ID'])
                 return True
             else:
                 return False
@@ -97,12 +101,19 @@ def show_items():
     # Pass the database results to the HTML template as the variable "items"
     return render_template('menu.html', cakes=cakes, pies=pies, breads=breads, cookies=cookies, others=others)
 
-@app.route('/product')
+@app.route('/product', methods=['GET', 'POST'])
 def product():
     name = request.args.get('name')
     price = request.args.get('price')
-    stock = request.args.get('stock')
+    stock = int(request.args.get('stock'))
     # print (stock)
+    if request.method == 'POST':
+        if 'logged_in' in session:
+            amount=request.form.get('quantity')
+            # insert_cart(submission)
+            print(amount)
+        else:
+            return redirect(url_for('signup'))
     return render_template('product.html', name=name, price=price, stock=stock)
 
 
@@ -124,23 +135,28 @@ def signup():
         email = request.form.get('email')
         username = request.form.get('username')
         password = bcrypt.hashpw(request.form.get('password').encode(), bcrypt.gensalt())
-        insert_acc(email, username, password)
-        return redirect(url_for('home'))
+        result= insert_acc(email, username, password)
+        if result:
+            return result
+        else:
+            flash("this email already exists")
+            return redirect(url_for('signup'))
+        # return redirect(url_for('home'))
 
     return render_template('signup.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 
 def login():
+    # if not 'logged_in' in session:
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
         if check_acc(email, password):
-            print("logged in!")
-            return redirect(url_for('home'))
-        
+            return render_template('cart.html', name = session['name'])
         else:
-            print("email or password is wrong")
+            flash("password or email is incorrect")
+            return redirect(url_for('login'))
 
     return render_template('login.html')
 
@@ -156,7 +172,7 @@ def cart():
     if 'logged_in' in session:
         return render_template('cart.html', name=session['name'])
     else: 
-        return render_template('signup.html')
+        return redirect(url_for('signup'))
 
 @app.route('/manifest.json')
 
