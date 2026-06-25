@@ -47,7 +47,81 @@
     </div>
 
     <div style = "border-bottom: 2px solid #84592B; margin-left : 2%; margin-right: 2%;"></div>
-    <h3>{{ name }}'s cart</h3>
+    <div style="margin-left: 5%; margin-top: 2%; margin-right: 5%;">
+        <h3 style="margin-bottom: 2%;">{{ name }}'s cart</h3>
+        <div>
+            <div>
+                <table>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    {% for item in usercart %}
+                    <tr class="cartrow">
+                        <td><img style='height: 100px;' src="{{ url_for('static', filename='items/' ~ item['product_name'] ~ '/logo.png') }}"></td>
+                        <td><a href="{{ url_for('product', pID=item['product_ID'], name=item['product_name'], price=item['price']) }}">{{ item['product_name'] }}</a></td>
+                        <td>
+                            <form id="order_quantity">
+                                <select name="quantity" id="quantity" data-price="{{ item['price'] }}" style="width: 100px;">
+                                    <option value="{{ item['amount'] }}" disabled selected hidden>{{ item['amount'] }}</option>
+                                    {% for i in range(1,  21) %}
+                                        <option value="{{ i }}">{{ i }}</option>
+                                    {% endfor %}
+                                </select>
+                            </form>
+                        </td>
+                        <td>
+                            <span id="totalprice">${{ item['price']*item['amount'] }}</span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <a href="menu">order more</a>                
+            </div>
+            <div>
+                <h3>total with GST</h3>
+                <h2 id="GSTtotal"></h2>
+                <button type="submit" form="order_quantity" class="buttonlink">place order</button>            
+            </div>            
+        </div>
+        
+
+        
+<!-- <a href="menu" class="buttonlink" style="padding-right: 5%;padding-left: 5%;margin-left: 0;margin-top: 5%;">SHOP FOR MORE</a>         -->
+    </div>
+    <script>
+        const quantities = document.querySelectorAll('#quantity');
+        const totals = document.querySelectorAll('#totalprice');
+
+        function updateGSTTotal() {
+            let subtotal = 0;
+
+            totals.forEach(total => {
+                subtotal += parseFloat(
+                    total.textContent.replace('$', '')
+                );
+            });
+
+            document.getElementById("GSTtotal").textContent =
+                '$' + (subtotal * 1.1).toFixed(2);
+        }
+
+        quantities.forEach((select, index) => {
+            select.addEventListener('change', function() {
+                const price = parseFloat(this.dataset.price);
+                const quantity = parseInt(this.value);
+
+                totals[index].textContent =
+                    '$' + (price * quantity).toFixed(2);
+                updateGSTTotal();
+            });
+        });
+
+        // document.getElementById("GSTtotal").textContent = Math.sumPrecise(totals)*1.1;
+        updateGSTTotal();
+    </script>
 
 </body>
 </html>

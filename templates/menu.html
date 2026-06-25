@@ -101,7 +101,7 @@
             <img src="{{ url_for('static', filename='items/' ~ item['product_name'] ~ '/logo.png') }}" class="user-image" />
             <h3 style="margin-bottom: 3%;">{{ item['product_name'] }}</h3>
             <p>${{ item['price'] }}</p>
-            <a href="{{ url_for('product', name=item['product_name'], price=item['price'], stock=item['stock']) }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
+            <a href="{{ url_for('product', pID=item['product_ID'], name=item['product_name'], price=item['price']) }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
         </div>
         {% endfor %}
     </div>
@@ -117,7 +117,7 @@
             <img src="{{ url_for('static', filename='items/' ~ item['product_name'] ~ '/logo.png') }}" class="user-image" />
             <h3 style="margin-bottom: 3%;">{{ item['product_name'] }}</h3>
             <p>${{ item['price'] }}</p>
-            <a href="{{ url_for('product', name=item['product_name'], price=item['price'], stock=item['stock']) }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
+            <a href="{{ url_for('product', pID=item['product_ID'], name=item['product_name'], price=item['price']) }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
         </div>
         {% endfor %}
     </div>
@@ -133,7 +133,7 @@
             <img src="{{ url_for('static', filename='items/' ~ item['product_name'] ~ '/logo.png') }}" class="user-image" />
             <h3 style="margin-bottom: 3%;">{{ item['product_name'] }}</h3>
             <p>${{ item['price'] }}</p>
-            <a href="{{ url_for('product', name=item['product_name'], price=item['price'], stock=item['stock']) }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
+            <a href="{{ url_for('product', pID=item['product_ID'], name=item['product_name'], price=item['price']) }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
         </div>
         {% endfor %}
     </div>
@@ -149,7 +149,7 @@
             <img src="{{ url_for('static', filename='items/' ~ item['product_name'] ~ '/logo.png') }}" class="user-image" />
             <h3 style="margin-bottom: 3%;">{{ item['product_name'] }}</h3>
             <p>${{ item['price'] }}</p>
-            <a href="{{ url_for('product', name=item['product_name'], price=item['price'], stock=item['stock']) }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
+            <a href="{{ url_for('product', pID=item['product_ID'], name=item['product_name'], price=item['price']) }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
         </div>
         {% endfor %}
     </div>
@@ -165,7 +165,7 @@
             <img src="{{ url_for('static', filename='items/' ~ item['product_name'] ~ '/logo.png') }}" class="user-image" />
             <h3 style="margin-bottom: 3%;">{{ item['product_name'] }}</h3>
             <p>${{ item['price'] }}</p>
-            <a href="{{ url_for('product', name=item['product_name'], price=item['price'], stock=item['stock']) }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
+            <a href="{{ url_for('product', pID=item['product_ID'], name=item['product_name'], price=item['price']) }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
         </div>
         {% endfor %}
     </div>

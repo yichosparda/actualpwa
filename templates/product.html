@@ -87,15 +87,14 @@
         <div style="width: 30%;">
             <h3> {{ name }}</h3>
             <h3> ${{ price }}</h3>
-            <p> {{ stock }} left!</p>
             <form method="POST">
                 <div>
                     <label>Quantity:</label>
                     <select name="quantity" id="quantity" style="width: 100px;">
-                        {% for i in range(1, stock + 1) %}
+                        {% for i in range(1,  21) %}
                             <option value="{{ i }}">{{ i }}</option>
                         {% endfor %}
-                    </select>                    
+                    </select>
                 </div>
 
                 <button onclick="alert('Added to cart!')" type="submit" class="buttonlink" style="margin-top: 5%;">add to cart</button>

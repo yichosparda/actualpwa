@@ -88,6 +88,21 @@ input {
   height: 25px;
 }
 
+table {
+  width: 70%;
+}
+
+table th, table td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+table td {
+  background: #F4E7CE;;
+  border-radius: 5px;
+  padding: 2%;
+}
+
 .subheader {
   color: #442D1C;
   font-family: MyCustomFont;
@@ -335,6 +350,9 @@ input {
 
   /* textarea {
     width: 50vh;
+  } */
+  /* table {
+    width: 80vh;
   } */
 
 }
