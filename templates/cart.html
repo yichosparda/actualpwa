@@ -29,13 +29,13 @@
         </a>
     </header>
 
-    <div style = "border-bottom: 2px solid #84592B; margin-left : 2%; margin-right: 2%;"></div>
+    <div style = "border-bottom: 2px solid #c7aa8a; margin-left : 2%; margin-right: 2%;"></div>
 
     <div class = "subheader">
         <div class = "buttoncontainer">
             <a class="buttonlink" href="/">HOME</a>
             <a class="buttonlink" href="menu" >MENU</a>
-            <a class="buttonlink" >CUSTOM</a>
+            <a class="buttonlink" href="custom">CUSTOM</a>
         </div>
         <div class = "linkcontainer">
             <a href="menu#cakes">CAKES</a>
@@ -46,54 +46,57 @@
         </div>
     </div>
 
-    <div style = "border-bottom: 2px solid #84592B; margin-left : 2%; margin-right: 2%;"></div>
+    <div style = "border-bottom: 2px solid #c7aa8a; margin-left : 2%; margin-right: 2%;"></div>
     <div style="margin-left: 5%; margin-top: 2%; margin-right: 5%;">
         <h3 style="margin-bottom: 2%;">{{ name }}'s cart</h3>
         <div>
             <div>
-                <table>
-                    <tr>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    {% for item in usercart %}
-                    <tr class="cartrow">
-                        <td><img style='height: 100px;' src="{{ url_for('static', filename='items/' ~ item['product_name'] ~ '/logo.png') }}"></td>
-                        <td><a href="{{ url_for('product', pID=item['product_ID'], name=item['product_name'], price=item['price']) }}">{{ item['product_name'] }}</a></td>
-                        <td>
-                            <form id="order_quantity">
-                                <select name="quantity" id="quantity" data-price="{{ item['price'] }}" style="width: 100px;">
-                                    <option value="{{ item['amount'] }}" disabled selected hidden>{{ item['amount'] }}</option>
+                <form method="POST" id="cart_form">
+                    <table>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        {% for item in usercart %}
+                        <tr class="cartrow">
+                            <td><img style='height: 100px;' src="{{ url_for('static', filename='items/' ~ item['product_name'] ~ '/logo.png') }}"></td>
+                            <td><a href="{{ url_for('product', pID=item['product_ID'], name=item['product_name'], price=item['price']) }}">{{ item['product_name'] }}</a></td>
+                            <td>
+                                <select name="quantity_{{ item['product_ID'] }}" class="quantity-select" data-price="{{ item['price'] }}" onchange="document.getElementById('cart_form').submit()">
+                                    <option value="{{ item['amount'] }}" selected>{{ item['amount'] }}</option>
                                     {% for i in range(1,  21) %}
                                         <option value="{{ i }}">{{ i }}</option>
                                     {% endfor %}
                                 </select>
-                            </form>
-                        </td>
-                        <td>
-                            <span id="totalprice">${{ item['price']*item['amount'] }}</span>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </table>
+                            </td>
+                            <td>
+                                <span class="totalprice">${{ item['price']*item['amount'] }}</span>
+                            </td>
+                            <td>
+                                <a href="{{ url_for('remove_product', pID=item['product_ID']) }}" class="buttonlink" style="font-size: 30px;padding: 10px;align-items: center;">X</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </form>
                 <a href="menu">order more</a>                
             </div>
+            <br>
             <div>
+                {% if usercart %}
                 <h3>total with GST</h3>
                 <h2 id="GSTtotal"></h2>
-                <button type="submit" form="order_quantity" class="buttonlink">place order</button>            
+                <a onclick="alert('Thank you for your purchase!')" href="checkout" class="buttonlink" style="padding: 5%; padding-top: 6px; padding-bottom: 6px;">place order</a>
+                {% endif %}
             </div>            
-        </div>
-        
-
-        
 <!-- <a href="menu" class="buttonlink" style="padding-right: 5%;padding-left: 5%;margin-left: 0;margin-top: 5%;">SHOP FOR MORE</a>         -->
     </div>
     <script>
-        const quantities = document.querySelectorAll('#quantity');
-        const totals = document.querySelectorAll('#totalprice');
+        const quantities = document.querySelectorAll('.quantity-select');
+        const totals = document.querySelectorAll('.totalprice');
 
         function updateGSTTotal() {
             let subtotal = 0;

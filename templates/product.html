@@ -27,7 +27,7 @@
         </a>
     </header>
 
-    <div style = "border-bottom: 2px solid #84592B; margin-left : 2%; margin-right: 2%;"></div>
+    <div style = "border-bottom: 2px solid #c7aa8a; margin-left : 2%; margin-right: 2%;"></div>
 
     <div class = "subheader">
         <div class = "buttoncontainer">
@@ -44,7 +44,7 @@
         </div>
     </div>
 
-    <div style = "border-bottom: 2px solid #84592B; margin-left : 2%; margin-right: 2%;"></div>
+    <div style = "border-bottom: 2px solid #c7aa8a; margin-left : 2%; margin-right: 2%;"></div>
 
     <div style="display: flex; justify-content: space-evenly; flex-wrap: wrap; margin-top: 5%;">
         <div>
@@ -76,17 +76,13 @@
                 
             <br>
 
-            <!-- The dots/circles -->
-            <!-- <div style="text-align:center">
-                <span class="dot" onclick="currentSlide(1)"></span>
-                <span class="dot" onclick="currentSlide(2)"></span>
-                <span class="dot" onclick="currentSlide(3)"></span>
-            </div> -->
         </div>
 
         <div style="width: 30%;">
             <h3> {{ name }}</h3>
             <h3> ${{ price }}</h3>
+            <p> {{ desc }} </p>
+            <p> ingredients: {{ ingredients }}</p>
             <form method="POST">
                 <div>
                     <label>Quantity:</label>
@@ -96,22 +92,17 @@
                         {% endfor %}
                     </select>
                 </div>
-
-                <button onclick="alert('Added to cart!')" type="submit" class="buttonlink" style="margin-top: 5%;">add to cart</button>
+                <br>
+                {% if status == True %}
+                <button onclick="alert('Added to cart!')" type="submit" class="buttonlink">add to cart</button>
+                {% endif %}
+                {% if status == False %}
+                <a href="login" class="buttonlink"">login to add to cart</a>
+                {% endif %}
             </form>
         </div>
     </div>
     
     <script src="{{ url_for('static', filename='script.js') }}"></script>
-    <!-- <script>
-        const selectNode = document.getElementById("quantity");
-        // Loop from 2020 to 2030
-        for (let i = 1; i <= stock; i++) {
-            let option = document.createElement("option");
-            option.value = i;
-            option.textContent = i;
-            selectNode.appendChild(option);
-        }
-    </script> -->
 </body>
 </html>

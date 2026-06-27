@@ -26,6 +26,10 @@ a:hover {
     cursor: pointer;
 }
 
+.afooter {
+  color: #efdab5;
+}
+
 textarea {
   width: 90%;
   box-sizing: border-box;
@@ -36,7 +40,7 @@ textarea {
 }
 
 body {
-    background-color: #F4E0BE;
+    background-color: #fff8eb;
     font-family: textfont;
     color: #442D1C;
     margin: 0;
@@ -63,6 +67,9 @@ header {
 footer {
   background-color: #442D1C;
   color: #efdab5;
+  display: flex;
+  justify-content: flex-start;
+  padding: 2%;
 }
 
 h2 {
@@ -79,6 +86,11 @@ h3 {
     margin: 0;
 }
 
+h4 {
+    font-family: MyCustomFont;
+    font-size: clamp(1rem,1.5vw, 1.5rem);
+}
+
 input {
   background-color: rgba(132, 89, 43, 0.2);
   border-color: #84592B;
@@ -90,6 +102,8 @@ input {
 
 table {
   width: 70%;
+  min-width: 450px;
+  text-align: center;
 }
 
 table th, table td {
@@ -133,13 +147,13 @@ table td {
 
 .buttonlink:hover {
   background-color: #84592B;
-  color:#F4E0BE;
+  color:#fff8eb;
   cursor: pointer;
 }
 
 .buttons {
   background-color: #442D1C;
-  color: #F4E0BE;
+  color: #fff8eb;
   font-family: MyCustomFont;
   font-size: small;
   padding-top: 1%;
@@ -176,7 +190,7 @@ table td {
     margin-right: 2%;
     margin-top: -10%;
     margin-bottom: 2%;
-    background-color: #F4E0BE;
+    background-color: #fff8eb;
     position:relative;
     z-index : 1;
     padding: 2%;
@@ -195,7 +209,7 @@ table td {
 .carousel {
   margin: 1%;
   margin-top: 5%;
-  background-color: #efdab5;
+  background-color: #f7efe0;
   border-radius: 8px;
   border-color: white;
   border-style: solid;
@@ -210,7 +224,7 @@ table td {
     margin-top:5%;
     position:relative;
     /* z-index : 1; */
-    background-color: rgba(236, 214, 176, 0.7);
+    background-color: rgba(255, 248, 235, 0.7);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     margin-right: 30%;
     margin-left: 30%;
@@ -225,7 +239,7 @@ table td {
     margin-top: 5%;
     display: flex;
     flex-direction: column;
-    width: 75%
+    width: 75%;
 }
 
 .show-password {
@@ -243,11 +257,12 @@ table td {
 }
 
 .coverbg {
-  margin-top: -100vh;
+  margin-top: -80vh;
   display: flex;
-  /* width: 100%; */
+  width: calc(2000px - 20vw); 
+  /* width: 120%; */
   /* width: 100vh; */
-  height: 150vh;
+  /* height: 150vh; */
   /* overflow: hidden; */
   position: relative;
   z-index: -1;
@@ -442,7 +457,7 @@ table td {
   /* width: auto; */
   /* margin-top: -22px; */
   /* padding: 10px; */
-  color: #F4E0BE;
+  color: #fff8eb;
   background-color: #442D1C;
   font-weight: bold;
   font-size: 18px;
@@ -469,7 +484,7 @@ table td {
 /* On hover, add a black background color with a little bit see-through */
 .prev:hover, .next:hover {
   background-color: #84592B;
-  color:#F4E0BE;
+  color:#fff8eb;
 }
 
 /* The dots/bullets/indicators */

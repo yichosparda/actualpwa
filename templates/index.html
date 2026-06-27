@@ -29,7 +29,7 @@
         </a>
     </header>
 
-    <div style = "border-bottom: 2px solid #84592B; margin-left : 2%; margin-right: 2%;"></div>
+    <div style = "border-bottom: 2px solid #c7aa8a; margin-left : 2%; margin-right: 2%;"></div>
 
     <div class = "subheader">
         <div class = "buttoncontainer">
@@ -46,10 +46,10 @@
         </div>
     </div>
 
-    <div style = "border-bottom: 2px solid #84592B; margin-left : 2%; margin-right: 2%;"></div>
+    <div style = "border-bottom: 2px solid #c7aa8a; margin-left : 2%; margin-right: 2%;"></div>
 
     <div>
-        <img src="{{ url_for('static', filename='cover.png') }}" alt="" width="100%" style = "margin-top: 1%;"> 
+        <img src="{{ url_for('static', filename='front.png') }}" alt="" style = "margin-top: 1%;width:100%; height:20%"> 
     </div>
 
     <div class = "page">
@@ -57,9 +57,9 @@
             <div class = "textcontainer">
                 <h2>WELCOME TO BAKERY NAME</h2>
                 <p style = "width: 60%;"">dsaf dsa dfs sakfhksdaljf sdajsdf dsk fdsakfdjkasdf </p>
-                <a class="buttonlink" style="width:40%;">contact us</a>
+                <!-- <a class="buttonlink" style="width:40%;">contact us</a> -->
             </div>
-            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" width="40%" style = "margin-left: auto;">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" style = "margin-left: auto; padding-right:5%; width: 40%;max-width: 300px;">
         </div>
 
         <div class="carousel">
@@ -70,26 +70,26 @@
 
                         <div class="card-item swiper-slide">
                             <img src="{{ url_for('static', filename='items/Vanilla Cake/logo.png') }}" alt="User Image" class="user-image" />
-                            <h3 style="margin-bottom: 3%;">vanilla cake</h3>
-                            <a class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
+                            <h3 style="margin-bottom: 3%;">Vanilla Cake</h3>
+                            <a href="{{ url_for('product', pID=1, name='Vanilla Cake', price=70) }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
                         </div>
 
                         <div class="card-item swiper-slide">
                             <img src="{{ url_for('static', filename='items/Eggtarts/logo.png') }}" alt="User Image" class="user-image" />
-                            <h3 style="margin-bottom: 3%;">eggtart</h3>
-                            <a class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
+                            <h3 style="margin-bottom: 3%;">Eggtart</h3>
+                            <a href="{{ url_for('product', pID=23, name='Eggtarts', price=8) }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
                         </div>
 
                         <div class="card-item swiper-slide">
                             <img src="{{ url_for('static', filename='items/Macarons/logo.png') }}" alt="User Image" class="user-image" />
-                            <h3 style="margin-bottom: 3%;">macarons</h3>
-                            <a class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
+                            <h3 style="margin-bottom: 3%;">Macarons</h3>
+                            <a href="{{ url_for('product', pID=15, name='Macarons', price=2.75) }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
                         </div>
 
                         <div class="card-item swiper-slide">
                             <img src="{{ url_for('static', filename='items/Banana Bread/logo.png') }}" alt="User Image" class="user-image" />
-                            <h3 style="margin-bottom: 3%;">banana bread</h3>
-                            <a class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
+                            <h3 style="margin-bottom: 3%;">Banana Bread</h3>
+                            <a href="{{ url_for('product', pID=11, name='Banana Bread', price=22) }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
                         </div>
 
                     </div>
@@ -104,7 +104,41 @@
     </div>
 
     <footer>
-        <h1>contact us</h1>
+        <img src="{{ url_for('static', filename='contact.png') }}" style="width: 20%;object-fit: contain;max-width: 200px;">
+        <div style=" width: 100%;display: flex; justify-content: space-evenly;">
+            <div style="width: 33%;text-align: center;">
+                <h4 style="color:#F4E0BE;">CONTACT US</h4>
+                <p>phone number : 04305832829</p>
+                <p>email : dkfjhdsf</p>
+                <p>address : </p>
+            </div>
+            <div style="width: 33%; text-align: center;">
+                <h4>SOCIALS</h4>
+                <p>instagram :</p>
+                <p>facebook :</p>
+            </div>  
+            <div style="width: 33%; text-align: center;">
+                <h4>MENU ITEMS</h4>
+                <p>
+                    <a href="menu#cakes" class="afooter">cakes</a>
+                </p>
+                <p>
+                    <a href="menu#breads" class="afooter">breads</a>
+                </p>
+                <p>
+                    <a href="menu#pies" class="afooter">pies</a>
+                </p>
+                <p>
+                    <a href="menu#cookies" class="afooter">cookies</a>
+                </p>
+                <p>
+                    <a href="menu#others" class="afooter">others</a>
+                </p>
+                
+            </div>          
+        </div>
+
+        
     </footer>
     <script src="{{ url_for('static', filename='swiper-bundle.min.js') }}"></script>
     <script src="{{ url_for('static', filename='carousel-home.js') }}"></script>

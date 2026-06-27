@@ -28,7 +28,7 @@
         </a>
     </header>
 
-    <div style = "border-bottom: 2px solid #84592B; margin-left : 2%; margin-right: 2%;"></div>
+    <div style = "border-bottom: 2px solid #c7aa8a; margin-left : 2%; margin-right: 2%;"></div>
 
     <div class = "subheader">
         <div class = "buttoncontainer">
@@ -45,19 +45,19 @@
         </div>
     </div>
 
-    <div style = "border-bottom: 2px solid #84592B; margin-left : 2%; margin-right: 2%;"></div>
+    <div style = "border-bottom: 2px solid #c7aa8a; margin-left : 2%; margin-right: 2%;"></div>
 
-    <div style="display:grid;place-items:center; width: 100%; margin-top:5%;">
+    <div style="text-align: center; width: 100%; margin-top:5%;">
         <h3>didn't find what you were looking for?</h3>
         <p>sign in and submit a request and we'll see what we can do!</p> 
     </div>
 
     <div class ="requestcontainer">
-        <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" width="40%">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt=""style="width: 40%; display: block;object-fit: contain; max-width: 400px">
         <div class="requestinner">
             <form method="POST">
                 <textarea name='request' maxlength="1000" required placeholder="max 1000 characters"></textarea>
-                <button type="submit" class="buttonlink" style="margin-left: auto;">submit</button>
+                <button type="submit" class="buttonlink" style="margin-left: auto;padding-top: 3px;padding-bottom: 3px;">submit</button>
             </form>
         </div>
     </div>

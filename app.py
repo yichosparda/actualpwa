@@ -29,13 +29,16 @@ def insert_acc(email, username, password):
         else:
             cursor.execute("INSERT INTO customers(email, username, password) VALUES (?,?,?)", (email,username,password))
             conn.commit()
-            # cursor.execute("CREATE TABLE IF NOT EXISTS")
             session['logged_in'] = True
             cursor.execute("SELECT cust_ID, username FROM customers WHERE email = ?", (email,))
             row = cursor.fetchone()
             session['ID'] = row[0]
             session['name'] = row[1]
-            return render_template('cart.html', name = session['name'])
+            cursor.execute(f"CREATE TABLE IF NOT EXISTS '{session['ID']}_cart'(product_ID INTEGER REFERENCES products(product_ID), amount INTEGER NOT NULL)")
+            conn.commit()
+            # return render_template('cart.html', name = session['name'])
+            return redirect(url_for('cart', name=session['name']))
+            
         print(session['ID'])
         # cursor.execute("CREATE TABLE employees")
     # print("You are in insert_data ->", data)
@@ -104,11 +107,11 @@ def home():
 def show_items():
     conn = get_db_connection()
     # Execute the SQL query to get all items
-    cakes = conn.execute('SELECT product_ID, product_name, price FROM products WHERE type="cake"').fetchall()
-    pies = conn.execute('SELECT product_ID, product_name, price FROM products WHERE type="pie"').fetchall()
-    breads = conn.execute('SELECT product_ID, product_name, price FROM products WHERE type="bread"').fetchall()
-    cookies = conn.execute('SELECT product_ID, product_name, price FROM products WHERE type="cookie"').fetchall()
-    others = conn.execute('SELECT product_ID, product_name, price FROM products WHERE type="other"').fetchall()
+    cakes = conn.execute('SELECT product_ID, product_name, price, ingredients, description FROM products WHERE type="cake"').fetchall()
+    pies = conn.execute('SELECT product_ID, product_name, price, ingredients, description FROM products WHERE type="pie"').fetchall()
+    breads = conn.execute('SELECT product_ID, product_name, price, ingredients, description FROM products WHERE type="bread"').fetchall()
+    cookies = conn.execute('SELECT product_ID, product_name, price, ingredients, description FROM products WHERE type="cookie"').fetchall()
+    others = conn.execute('SELECT product_ID, product_name, price, ingredients, description FROM products WHERE type="other"').fetchall()
     conn.close()
     # Pass the database results to the HTML template as the variable "items"
     return render_template('menu.html', cakes=cakes, pies=pies, breads=breads, cookies=cookies, others=others)
@@ -118,14 +121,18 @@ def product():
     pID = int(request.args.get('pID'))
     name = request.args.get('name')
     price = request.args.get('price')
+    ingredients = request.args.get('ingredients')
+    desc = request.args.get('desc')
+    try: status = session['logged_in']
+    except : status = False
     if request.method == 'POST':
-        if 'logged_in' in session:
-            amount=request.form.get('quantity')
-            insert_cart(pID, amount)
-            return redirect(url_for('show_items'))
-        else:
-            return redirect(url_for('signup'))
-    return render_template('product.html', pID=pID, name=name, price=price)
+        # if 'logged_in' in session:
+        amount=request.form.get('quantity')
+        insert_cart(pID, amount)
+        return redirect(url_for('show_items'))
+        # else:
+        #     return redirect(url_for('signup'))
+    return render_template('product.html', pID=pID, name=name, price=price, status=status, ingredients=ingredients, desc=desc)
 
 
 @app.route('/custom', methods=['GET','POST'])
@@ -164,7 +171,7 @@ def login():
         email = request.form.get('email')
         password = request.form.get('password')
         if check_acc(email, password):
-            return render_template('cart.html', name = session['name'])
+            return redirect(url_for('cart', name=session['name']))
         else:
             flash("password or email is incorrect")
             return redirect(url_for('login'))
@@ -185,9 +192,46 @@ def cart():
         # Execute the SQL query to get all items
         usercart = conn.execute(f"SELECT u.product_ID, p.product_name, u.amount, p.price FROM '{session['ID']}_cart' AS u LEFT JOIN products AS p ON u.product_ID=p.product_ID").fetchall()
         
+        if request.method =='POST':
+            quantities = {k: v for k, v in request.form.items() if k.startswith('quantity_')}
+            if not quantities:
+                print('No quantity fields in form:', dict(request.form))
+            for field_name, value in quantities.items():
+                product_ID = field_name.split('_', 1)[1]
+                try:
+                    quantity = int(value)
+                except ValueError:
+                    continue
+                conn.execute(
+                    f"UPDATE '{session['ID']}_cart' SET amount=? WHERE product_ID=?",
+                    (quantity, int(product_ID))
+                )
+            conn.commit()
+            return redirect(url_for('cart'))
+
         return render_template('cart.html', name=session['name'],usercart=usercart)
     else: 
         return redirect(url_for('signup'))
+
+@app.route('/checkout')
+def checkout():
+    conn = get_db_connection()
+    order_data = conn.execute(f"SELECT product_ID, amount FROM '{session['ID']}_cart'").fetchall()
+    for item in order_data:
+        conn.execute(f"INSERT INTO orders (cust_ID, product_ID, quantity) VALUES ({session['ID']}, {item['product_ID']}, {item['amount']})")
+        conn.commit()
+    conn.execute(f"DELETE FROM '{session['ID']}_cart'")
+    conn.commit()
+    return redirect(url_for('cart'))
+
+@app.route('/remove_product')
+def remove_product():
+    conn = get_db_connection()
+    pID = request.args.get('pID')
+    print(pID)
+    conn.execute(f"DELETE FROM '{session['ID']}_cart' WHERE product_ID ={pID}")
+    conn.commit()
+    return redirect(url_for('cart'))
 
 @app.route('/manifest.json')
 

@@ -30,7 +30,7 @@
         </a>
     </header>
 
-    <div style = "border-bottom: 2px solid #84592B; margin-left : 2%; margin-right: 2%;"></div>
+    <div style = "border-bottom: 2px solid #c7aa8a; margin-left : 2%; margin-right: 2%;"></div>
 
     <div class = "subheader">
         <div class = "buttoncontainer">
@@ -47,7 +47,7 @@
         </div>
     </div>
 
-    <div style = "border-bottom: 2px solid #84592B; margin-left : 2%; margin-right: 2%;"></div>
+    <div style = "border-bottom: 2px solid #c7aa8a; margin-left : 2%; margin-right: 2%;"></div>
     <br>
     <br>
     <div>
@@ -58,25 +58,25 @@
                     <div class="card-item swiper-slide">
                         <img src="{{ url_for('static', filename='items/Vanilla Cake/logo.png') }}" alt="User Image" class="user-image" />
                         <h3 style="margin-bottom: 3%;">Vanilla Cake</h3>
-                        <a class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
+                        <a href="{{ url_for('product', pID=1, name='Vanilla Cake', price=70) }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
                     </div>
 
                     <div class="card-item swiper-slide">
                         <img src="{{ url_for('static', filename='items/Eggtarts/logo.png') }}" alt="User Image" class="user-image" />
-                        <h3 style="margin-bottom: 3%;">eggtart</h3>
-                        <a class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
+                        <h3 style="margin-bottom: 3%;">Eggtart</h3>
+                        <a href="{{ url_for('product', pID=23, name='Eggtarts', price=8) }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
                     </div>
 
                     <div class="card-item swiper-slide">
                         <img src="{{ url_for('static', filename='items/Macarons/logo.png') }}" alt="User Image" class="user-image" />
-                        <h3 style="margin-bottom: 3%;">macarons</h3>
-                        <a class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
+                        <h3 style="margin-bottom: 3%;">Macarons</h3>
+                        <a href="{{ url_for('product', pID=15, name='Macarons', price=2.75) }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
                     </div>
 
                     <div class="card-item swiper-slide">
                         <img src="{{ url_for('static', filename='items/Banana Bread/logo.png') }}" alt="User Image" class="user-image" />
-                        <h3 style="margin-bottom: 3%;">banana bread</h3>
-                        <a class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
+                        <h3 style="margin-bottom: 3%;">Banana Bread</h3>
+                        <a href="{{ url_for('product', pID=11, name='Banana Bread', price=22) }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
                     </div>
 
                 </div>
@@ -93,7 +93,7 @@
     <br>
     <br>
     <h3 id="cakes" style="text-align: center;">cakes</h3>
-    <div style = "border-bottom: 1px solid #84592B; margin-left : 20%; margin-right: 20%;"></div>
+    <div style = "border-bottom: 1px solid #c7aa8a; margin-left : 20%; margin-right: 20%;"></div>
     <br>
     <div class="menucontainer">
         {% for item in cakes %}
@@ -101,7 +101,7 @@
             <img src="{{ url_for('static', filename='items/' ~ item['product_name'] ~ '/logo.png') }}" class="user-image" />
             <h3 style="margin-bottom: 3%;">{{ item['product_name'] }}</h3>
             <p>${{ item['price'] }}</p>
-            <a href="{{ url_for('product', pID=item['product_ID'], name=item['product_name'], price=item['price']) }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
+            <a href="{{ url_for('product', pID=item['product_ID'], name=item['product_name'], price=item['price'], ingredients=item['ingredients'], desc=item['description']) }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
         </div>
         {% endfor %}
     </div>
@@ -109,7 +109,7 @@
     <br>
     <br>
     <h3 id="breads" style="text-align: center;">breads</h3>
-    <div style = "border-bottom: 1px solid #84592B; margin-left : 20%; margin-right: 20%;"></div>
+    <div style = "border-bottom: 1px solid #c7aa8a; margin-left : 20%; margin-right: 20%;"></div>
     <br>
     <div class="menucontainer">
         {% for item in breads %}
@@ -117,7 +117,7 @@
             <img src="{{ url_for('static', filename='items/' ~ item['product_name'] ~ '/logo.png') }}" class="user-image" />
             <h3 style="margin-bottom: 3%;">{{ item['product_name'] }}</h3>
             <p>${{ item['price'] }}</p>
-            <a href="{{ url_for('product', pID=item['product_ID'], name=item['product_name'], price=item['price']) }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
+            <a href="{{ url_for('product', pID=item['product_ID'], name=item['product_name'], price=item['price'], ingredients=item['ingredients'], desc=item['description']) }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
         </div>
         {% endfor %}
     </div>
@@ -125,7 +125,7 @@
     <br>
     <br>
     <h3 id="pies" style="text-align: center;">pies</h3>
-    <div style = "border-bottom: 1px solid #84592B; margin-left : 20%; margin-right: 20%;"></div>
+    <div style = "border-bottom: 1px solid #c7aa8a; margin-left : 20%; margin-right: 20%;"></div>
     <br>
     <div class="menucontainer">
         {% for item in pies %}
@@ -133,7 +133,7 @@
             <img src="{{ url_for('static', filename='items/' ~ item['product_name'] ~ '/logo.png') }}" class="user-image" />
             <h3 style="margin-bottom: 3%;">{{ item['product_name'] }}</h3>
             <p>${{ item['price'] }}</p>
-            <a href="{{ url_for('product', pID=item['product_ID'], name=item['product_name'], price=item['price']) }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
+            <a href="{{ url_for('product', pID=item['product_ID'], name=item['product_name'], price=item['price'], ingredients=item['ingredients'], desc=item['description']) }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
         </div>
         {% endfor %}
     </div>
@@ -141,7 +141,7 @@
     <br>
     <br>
     <h3 id="cookies" style="text-align: center;">cookies</h3>
-    <div style = "border-bottom: 1px solid #84592B; margin-left : 20%; margin-right: 20%;"></div>
+    <div style = "border-bottom: 1px solid #c7aa8a; margin-left : 20%; margin-right: 20%;"></div>
     <br>
     <div class="menucontainer">
         {% for item in cookies %}
@@ -149,7 +149,7 @@
             <img src="{{ url_for('static', filename='items/' ~ item['product_name'] ~ '/logo.png') }}" class="user-image" />
             <h3 style="margin-bottom: 3%;">{{ item['product_name'] }}</h3>
             <p>${{ item['price'] }}</p>
-            <a href="{{ url_for('product', pID=item['product_ID'], name=item['product_name'], price=item['price']) }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
+            <a href="{{ url_for('product', pID=item['product_ID'], name=item['product_name'], price=item['price'], ingredients=item['ingredients'], desc=item['description']) }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
         </div>
         {% endfor %}
     </div>
@@ -157,7 +157,7 @@
     <br>
     <br>
     <h3 id = "others" style="text-align: center;">others</h3>
-    <div style = "border-bottom: 1px solid #84592B; margin-left : 20%; margin-right: 20%;"></div>
+    <div style = "border-bottom: 1px solid #c7aa8a; margin-left : 20%; margin-right: 20%;"></div>
     <br>
     <div class="menucontainer">
         {% for item in others %}
@@ -165,7 +165,7 @@
             <img src="{{ url_for('static', filename='items/' ~ item['product_name'] ~ '/logo.png') }}" class="user-image" />
             <h3 style="margin-bottom: 3%;">{{ item['product_name'] }}</h3>
             <p>${{ item['price'] }}</p>
-            <a href="{{ url_for('product', pID=item['product_ID'], name=item['product_name'], price=item['price']) }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
+            <a href="{{ url_for('product', pID=item['product_ID'], name=item['product_name'], price=item['price'], ingredients=item['ingredients'], desc=item['description']) }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
         </div>
         {% endfor %}
     </div>
