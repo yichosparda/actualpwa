@@ -23,7 +23,7 @@
 <body>
     <header>
         <img src="{{ url_for('static', filename='bakery.png') }}" alt=""width="50px"">
-        <h1 style = "text-align: left; margin-left: 1%;">NAME OF BAKERY</h1>
+        <h1 style = "text-align: left; margin-left: 1%;">京PASTRIES</h1>
         <a href="cart" style="margin-left: auto;">
             <img src="{{ url_for('static', filename='icons/cart.png') }}" alt=""width="50px">
         </a>
@@ -55,7 +55,7 @@
     <div class = "page">
         <div class = "pagetop">
             <div class = "textcontainer">
-                <h2>WELCOME TO BAKERY NAME</h2>
+                <h2>WELCOME TO 京PASTRIES</h2>
                 <p style = "width: 60%;"">dsaf dsa dfs sakfhksdaljf sdajsdf dsk fdsakfdjkasdf </p>
                 <!-- <a class="buttonlink" style="width:40%;">contact us</a> -->
             </div>
@@ -71,25 +71,25 @@
                         <div class="card-item swiper-slide">
                             <img src="{{ url_for('static', filename='items/Vanilla Cake/logo.png') }}" alt="User Image" class="user-image" />
                             <h3 style="margin-bottom: 3%;">Vanilla Cake</h3>
-                            <a href="{{ url_for('product', pID=1, name='Vanilla Cake', price=70) }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
+                            <a href="{{ url_for('product', pID=1, name='Vanilla Cake', price=70, ingredients='Flour, Sugar, Butter, Eggs, Milk, Baking Powder, Vanilla Extract, Salt', desc='A soft and fluffy vanilla sponge cake with a rich buttery flavor, perfect for any celebration.') }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
                         </div>
 
                         <div class="card-item swiper-slide">
                             <img src="{{ url_for('static', filename='items/Eggtarts/logo.png') }}" alt="User Image" class="user-image" />
                             <h3 style="margin-bottom: 3%;">Eggtart</h3>
-                            <a href="{{ url_for('product', pID=23, name='Eggtarts', price=8) }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
+                            <a href="{{ url_for('product', pID=23, name='Eggtarts', price=8, ingredients ='Puff Pastry, Eggs, Milk, Sugar, Vanilla Extract', desc='A flaky pastry shell filled with smooth, creamy baked egg custard.') }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
                         </div>
 
                         <div class="card-item swiper-slide">
                             <img src="{{ url_for('static', filename='items/Macarons/logo.png') }}" alt="User Image" class="user-image" />
                             <h3 style="margin-bottom: 3%;">Macarons</h3>
-                            <a href="{{ url_for('product', pID=15, name='Macarons', price=2.75) }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
+                            <a href="{{ url_for('product', pID=15, name='Macarons', price=2.75, ingredients = 'Almond Flour, Powdered Sugar, Egg Whites, Granulated Sugar, Food Coloring, Vanilla Extract', desc='Delicate almond meringue cookies filled with smooth flavored cream.') }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
                         </div>
 
                         <div class="card-item swiper-slide">
                             <img src="{{ url_for('static', filename='items/Banana Bread/logo.png') }}" alt="User Image" class="user-image" />
                             <h3 style="margin-bottom: 3%;">Banana Bread</h3>
-                            <a href="{{ url_for('product', pID=11, name='Banana Bread', price=22) }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
+                            <a href="{{ url_for('product', pID=11, name='Banana Bread', price=22, ingredients='Bananas, Flour, Sugar, Butter, Eggs, Baking Soda, Vanilla Extract, Salt', desc='A moist banana loaf made with ripe bananas for natural sweetness and flavor.') }}" class="buttonlink" style="padding-top:8px; padding-bottom: 8px;">BUY NOW</a>
                         </div>
 
                     </div>
@@ -106,40 +106,54 @@
     <footer>
         <img src="{{ url_for('static', filename='contact.png') }}" style="width: 20%;object-fit: contain;max-width: 200px;">
         <div style=" width: 100%;display: flex; justify-content: space-evenly;">
-            <div style="width: 33%;text-align: center;">
-                <h4 style="color:#F4E0BE;">CONTACT US</h4>
-                <p>phone number : 04305832829</p>
-                <p>email : dkfjhdsf</p>
-                <p>address : </p>
+            <div style="width: 33%; ">
+                <h4>CONTACT US</h4>
+                <p style="display:flex; align-items: center;">
+                    <img src="{{ url_for('static', filename='icons/phone.png') }}" style="width: 20px;">
+                    phone number : 04305832829
+                </p>
+                <p style="display:flex;overflow-wrap: break-word;word-break: break-all;">
+                    <img src="{{ url_for('static', filename='icons/mail.png') }}" style="width: 20px;">
+                    email : jingpastries@gmail.com
+                </p>
+                <p style="display:flex; align-items: center;">
+                    <img src="{{ url_for('static', filename='icons/address.png') }}" style="width: 20px;">
+                    address : 236 Pacific Highway, Hornsby, NSW 2077
+                </p>
             </div>
-            <div style="width: 33%; text-align: center;">
+            <div style="width: 25%;">
                 <h4>SOCIALS</h4>
-                <p>instagram :</p>
-                <p>facebook :</p>
+                <p style="display:flex; align-items: center;word-break: break-all;">
+                    <img src="{{ url_for('static', filename='icons/insta.png') }}" style="width: 20px;">
+                    instagram : @jing_pastries</p>
+                <p style="display:flex; align-items: center;word-break: break-all;">
+                    <img src="{{ url_for('static', filename='icons/facebook.png') }}" style="width: 20px;">
+                    facebook : JINGPASTRIES
+                </p>
             </div>  
-            <div style="width: 33%; text-align: center;">
+            <div style="width: 25%;">
                 <h4>MENU ITEMS</h4>
-                <p>
+                <p style="display:flex; align-items: center;">
+                    <img src="{{ url_for('static', filename='icons/cake.png') }}" style="width: 20px;">
                     <a href="menu#cakes" class="afooter">cakes</a>
                 </p>
-                <p>
+                <p style="display:flex; align-items: center;">
+                    <img src="{{ url_for('static', filename='icons/bread.png') }}" style="width: 20px;">
                     <a href="menu#breads" class="afooter">breads</a>
                 </p>
-                <p>
+                <p style="display:flex; align-items: center;">
+                    <img src="{{ url_for('static', filename='icons/pie.png') }}" style="width: 20px;">
                     <a href="menu#pies" class="afooter">pies</a>
                 </p>
-                <p>
+                <p style="display:flex; align-items: center;">
+                    <img src="{{ url_for('static', filename='icons/cookie.png') }}" style="width: 20px;">
                     <a href="menu#cookies" class="afooter">cookies</a>
                 </p>
-                <p>
-                    <a href="menu#others" class="afooter">others</a>
-                </p>
                 
-            </div>          
+            </div>      
         </div>
-
-        
     </footer>
+    
     <script src="{{ url_for('static', filename='swiper-bundle.min.js') }}"></script>
     <script src="{{ url_for('static', filename='carousel-home.js') }}"></script>
 </body>

@@ -22,7 +22,7 @@
 <body>
     <header>
         <img src="{{ url_for('static', filename='bakery.png') }}" alt=""width="50px"">
-        <h1 style = "text-align: left; margin-left: 1%;">NAME OF BAKERY</h1>
+        <h1 style = "text-align: left; margin-left: 1%;">京PASTRIES</h1>
         <a style="margin-left: auto;">
             <a href="logout"style="margin-left: auto;">logout</a>
             <img src="{{ url_for('static', filename='icons/cart.png') }}" alt=""width="50px">
@@ -94,6 +94,8 @@
             </div>            
 <!-- <a href="menu" class="buttonlink" style="padding-right: 5%;padding-left: 5%;margin-left: 0;margin-top: 5%;">SHOP FOR MORE</a>         -->
     </div>
+    
+
     <script>
         const quantities = document.querySelectorAll('.quantity-select');
         const totals = document.querySelectorAll('.totalprice');
@@ -125,6 +127,5 @@
         // document.getElementById("GSTtotal").textContent = Math.sumPrecise(totals)*1.1;
         updateGSTTotal();
     </script>
-
 </body>
 </html>

@@ -21,16 +21,16 @@ def insert_acc(email, username, password):
     with sqlite3.connect("myDB.db") as conn:
         cursor = conn.cursor()
         # Use parameterized query to avoid SQL injection and handle values safely
-        cursor.execute("SELECT EXISTS(SELECT 1 FROM customers WHERE email = ?)", (email,))
+        cursor.execute("SELECT EXISTS(SELECT 1 FROM users WHERE email = ?)", (email,))
         email_exists=cursor.fetchone()[0]
         if email_exists:
             return None
         
         else:
-            cursor.execute("INSERT INTO customers(email, username, password) VALUES (?,?,?)", (email,username,password))
+            cursor.execute("INSERT INTO users(email, username, password) VALUES (?,?,?)", (email,username,password))
             conn.commit()
             session['logged_in'] = True
-            cursor.execute("SELECT cust_ID, username FROM customers WHERE email = ?", (email,))
+            cursor.execute("SELECT user_ID, username FROM users WHERE email = ?", (email,))
             row = cursor.fetchone()
             session['ID'] = row[0]
             session['name'] = row[1]
@@ -50,7 +50,7 @@ def check_acc(email, password):
     with sqlite3.connect("myDB.db") as conn:
         cursor = conn.cursor()
         try:
-            cursor.execute("SELECT password FROM customers WHERE email = ?", (email,))
+            cursor.execute("SELECT password FROM users WHERE email = ?", (email,))
             row = cursor.fetchone()
             
             # 3. If user doesn't exist, return False
@@ -64,7 +64,7 @@ def check_acc(email, password):
             # 4. Check if the provided password matches the stored hash
             if bcrypt.checkpw(password.encode(), stored_password):
                 session['logged_in'] = True
-                cursor.execute("SELECT cust_ID, username FROM customers WHERE email = ?", (email,))
+                cursor.execute("SELECT user_ID, username FROM users WHERE email = ?", (email,))
                 row = cursor.fetchone()
                 session['ID'] = row[0]
                 session['name'] = row[1]
@@ -80,7 +80,7 @@ def insert_request(submission):
     with sqlite3.connect("myDB.db") as conn:
         cursor = conn.cursor()
         # Use parameterized query to avoid SQL injection and handle values safely
-        cursor.execute("INSERT INTO requests(cust_ID, request) VALUES (?,?)", (session['ID'], submission))
+        cursor.execute("INSERT INTO requests(user_ID, request) VALUES (?,?)", (session['ID'], submission))
         conn.commit()
 
 def insert_cart(pID, amount):
@@ -218,7 +218,7 @@ def checkout():
     conn = get_db_connection()
     order_data = conn.execute(f"SELECT product_ID, amount FROM '{session['ID']}_cart'").fetchall()
     for item in order_data:
-        conn.execute(f"INSERT INTO orders (cust_ID, product_ID, quantity) VALUES ({session['ID']}, {item['product_ID']}, {item['amount']})")
+        conn.execute(f"INSERT INTO orders (user_ID, product_ID, quantity) VALUES ({session['ID']}, {item['product_ID']}, {item['amount']})")
         conn.commit()
     conn.execute(f"DELETE FROM '{session['ID']}_cart'")
     conn.commit()
