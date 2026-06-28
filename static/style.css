@@ -203,7 +203,8 @@ table td {
 
 .pagetop {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+
 }
 
 .carousel {

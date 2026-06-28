@@ -2,7 +2,6 @@ const CACHE_NAME = "pwa-cache-v2";  // Increment version to force update
 const urlsToCache = [
   "/",
   "/index.html",
-  "/page1.html",
   "/signup.html",
   "/login.html",
   "/custom.html",
@@ -15,18 +14,11 @@ const urlsToCache = [
   "/static/carousel.js",
   "/static/swiper-bundle.min.js",
   "/static/bakery.png",
+  "/static/front.png",
   "/static/favicon.ico",
   "/static/cover.png",
   "/static/icons/cart.png",
   "/static/logo.png",
-  "/static/items/chocolate_cake/logo.png",
-  "/static/items/chocolate_cake/1.png",
-  "/static/items/chocolate_cake/2.png",
-  "/static/items/chocolate_cake/3.png",
-  "/static/items/vanilla_cake/logo.png",
-  "/static/items/vanilla_cake/1.png",
-  "/static/items/vanilla_cake/2.png",
-  "/static/items/vanilla_cake/3.png",
 ];
 // Note that this is coded to minimise caching. This decreases performance but makes debugging easier
 self.addEventListener("install", event => {
