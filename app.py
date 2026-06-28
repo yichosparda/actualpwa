@@ -1,11 +1,18 @@
 from flask import Flask, render_template, session, request, redirect, url_for, flash
 import sqlite3
 import bcrypt
+import bleach
 s = bcrypt.gensalt()
 
 app = Flask(__name__)
 
 app.secret_key = 'your_secret_key'
+
+app.config.update(
+    SESSION_COOKIE_HTTPONLY=True,
+    SESSION_COOKIE_SECURE=True,   # True if using HTTPS
+    SESSION_COOKIE_SAMESITE='Lax'
+)
 
 def get_db_connection():
     # connects to SQL database file
@@ -71,9 +78,19 @@ def check_acc(email, password):
             return False
 
 def insert_request(submission):
+    submission = bleach.clean(
+        submission,
+        tags=[],
+        attributes={},
+        strip=True
+    )
+
     with sqlite3.connect("myDB.db") as conn:
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO requests(user_ID, request) VALUES (?,?)", (session['ID'], submission))
+        cursor.execute(
+            "INSERT INTO requests(user_ID, request) VALUES (?, ?)",
+            (session['ID'], submission)
+        )
         conn.commit()
 
 def insert_cart(pID, amount):
@@ -147,8 +164,8 @@ def signup():
         #receiving data from html
         email = request.form.get('email')
         username = request.form.get('username')
-        #hashing password for security
         password = bcrypt.hashpw(request.form.get('password').encode(), bcrypt.gensalt())
+        #hashing password for security
         result= insert_acc(email, username, password) #try to create new account
         if result: #if successful
             return result
@@ -214,7 +231,7 @@ def checkout():
     order_data = conn.execute(f"SELECT product_ID, amount FROM '{session['ID']}_cart'").fetchall()
     #fetching all items from user cart
     for item in order_data:
-        conn.execute(f"INSERT INTO orders (user_ID, product_ID, quantity) VALUES ({session['ID']}, {item['product_ID']}, {item['amount']})")
+        conn.execute("INSERT INTO orders (user_ID, product_ID, quantity) VALUES (?, ?, ?)", (session['ID'], item['product_ID'], item['amount']))
         conn.commit()
         #adds each item as an instance in the orders table
     conn.execute(f"DELETE FROM '{session['ID']}_cart'") #clears user table
@@ -225,7 +242,7 @@ def checkout():
 def remove_product():
     conn = get_db_connection()
     pID = request.args.get('pID')
-    conn.execute(f"DELETE FROM '{session['ID']}_cart' WHERE product_ID ={pID}")
+    conn.execute(f"DELETE FROM '{session['ID']}_cart' WHERE product_ID = ?", (pID,))
     conn.commit()
     return redirect(url_for('cart'))
 
